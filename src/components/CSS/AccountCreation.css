@@ -1,0 +1,143 @@
+.container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  background-color: #f5f6fa;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #222f3e;
+}
+
+.description {
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: #57606f;
+}
+
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+}
+
+.primary-button {
+  background-color: #5e84e2;
+  color: #ffffff;
+  margin-right: 10px;
+}
+
+.secondary-button {
+  background-color: #ffffff;
+  color: #5e84e2;
+  border: 1px solid #5e84e2;
+}
+
+.input-container {
+  margin-bottom: 20px;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.submit-button {
+  background-color: #5e84e2;
+  color: #ffffff;
+  border: none;
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.seed-phrase-text {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #222f3e;
+}
+
+.seed-phrase {
+  font-family: monospace;
+  font-size: 14px;
+  word-break: break-word;
+  background-color: #f5f6fa;
+  border: 1px solid #dcdde1;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  color: #57606f;
+}
+
+.next-button {
+  background-color: #5e84e2;
+  color: #ffffff;
+  border: none;
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.address-text {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #222f3e;
+}
+
+.balance-text {
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: #57606f;
+}
+
+.account-inputs {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.account-inputs input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.send-button {
+  background-color: #5e84e2;
+  color: #ffffff;
+  border: none;
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.logout-button {
+  background-color: #ffffff;
+  color: #5e84e2;
+  border: 1px solid #5e84e2;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
