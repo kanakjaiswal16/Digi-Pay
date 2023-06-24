@@ -141,3 +141,39 @@
   border-radius: 4px;
   cursor: pointer;
 }
+
+.transaction-history {
+  margin-top: 20px;
+}
+
+.transaction-history h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.transaction {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.transaction p {
+  margin: 0;
+}
+
+.transaction p:first-child {
+  font-weight: bold;
+}
+
+.transaction p:not(:first-child) {
+  margin-top: 5px;
+}
+
+
+.transaction p.hash {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
