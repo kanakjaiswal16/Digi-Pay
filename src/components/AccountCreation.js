@@ -3,7 +3,7 @@ import { ethers } from "ethers";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./CSS/AccountCreation.css";
-
+console.log(process.env.REACT_APP_ETHERSCAN_API_KEY);
 export default function AccountCreation() {
   const [isRecover, setRecover] = useState(false);
   const [seedPhrase, setSeedPhrase] = useState("");
@@ -13,6 +13,7 @@ export default function AccountCreation() {
   const [isSeed, setSeed] = useState(false);
   const [receiver, setReceiver] = useState("");
   const [amount, setAmount] = useState("");
+  const [transactions, setTransactions] = useState([]);
 
   useEffect(() => {
     if (wallet) {
@@ -27,11 +28,41 @@ export default function AccountCreation() {
         setAccountBalance(formattedBalance);
       };
 
+      const fetchTransactionHistory = async () => {
+        try {
+          const response = await fetch(
+            `https://api-sepolia.etherscan.io/api?module=account&action=txlist&address=${wallet.address}&startblock=0&endblock=99999999&page=1&offset=10&sort=asc&apikey=4I49XGQC3GP8AWXKZBJ8UEZRKXV4JW1ZK7`
+          );
+          const data = await response.json();
+          console.log(data);
+          if (data.status === "1") {
+            setTransactions(data.result);
+          } else {
+            console.error("Error fetching transaction history:", data.message);
+            toast.error(
+              "Error fetching transaction history. Please try again.",
+              {
+                position: toast.POSITION.TOP_RIGHT,
+              }
+            );
+          }
+        } catch (error) {
+          console.error("Error fetching transaction history:", error);
+          toast.error("Error fetching transaction history. Please try again.", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+        }
+      };
+
       // Fetch the initial balance
       fetchBalance();
+      fetchTransactionHistory();
 
-      // Fetch the updated balance every 10 seconds (adjust the interval as needed)
-      const interval = setInterval(fetchBalance, 10000);
+      // Fetch the updated balance every 10 seconds
+      const interval = setInterval(() => {
+        fetchBalance();
+        fetchTransactionHistory();
+      }, 10000);
 
       // Clean up the interval on component unmount
       return () => clearInterval(interval);
@@ -176,6 +207,27 @@ export default function AccountCreation() {
           <button className="logout-button" onClick={onLogout}>
             Logout
           </button>
+          <div className="transaction-history">
+            <h3>Transaction History</h3>
+            {transactions.map((tx, index) => (
+              <div key={index} className="transaction">
+                <p className="hash">
+                  Hash:{" "}
+                  <a
+                    href={`https://sepolia.etherscan.io/tx/${tx.hash}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {tx.hash}
+                  </a>
+                </p>
+
+                <p>From: {tx.from}</p>
+                <p>To: {tx.to}</p>
+                <p>Value: {ethers.utils.formatEther(tx.value)} ETH</p>
+              </div>
+            ))}
+          </div>
         </div>
       )}
       <ToastContainer />
