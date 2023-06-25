@@ -6,7 +6,8 @@ import "./CSS/AccountCreation.css";
 import blockchain from "./CSS/Blockchain.json";
 import logo from "./CSS/Logo.json";
 import Lottie from "lottie-react";
-console.log(process.env.REACT_APP_ETHERSCAN_API_KEY);
+
+
 export default function AccountCreation() {
   const [isRecover, setRecover] = useState(false);
   const [seedPhrase, setSeedPhrase] = useState("");
@@ -40,14 +41,6 @@ export default function AccountCreation() {
           console.log(data);
           if (data.status === "1") {
             setTransactions(data.result);
-          } else {
-            console.error("Error fetching transaction history:", data.message);
-            toast.error(
-              "Error fetching transaction history. Please try again.",
-              {
-                position: toast.POSITION.TOP_RIGHT,
-              }
-            );
           }
         } catch (error) {
           console.error("Error fetching transaction history:", error);
