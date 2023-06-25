@@ -22,7 +22,7 @@ export default function AccountCreation() {
   useEffect(() => {
     if (wallet) {
       const provider = new ethers.providers.JsonRpcProvider(
-        "https://eth-sepolia.g.alchemy.com/v2/-4e5fsDjluNgzUNf9u0nNElwVvNV2QYq"
+        "Your RPC URL"
       );
 
       // Function to fetch the updated balance
@@ -35,7 +35,7 @@ export default function AccountCreation() {
       const fetchTransactionHistory = async () => {
         try {
           const response = await fetch(
-            `https://api-sepolia.etherscan.io/api?module=account&action=txlist&address=${wallet.address}&startblock=0&endblock=99999999&page=1&offset=10&sort=asc&apikey=4I49XGQC3GP8AWXKZBJ8UEZRKXV4JW1ZK7`
+            `https://api-sepolia.etherscan.io/api?module=account&action=txlist&address=${wallet.address}&startblock=0&endblock=99999999&page=1&offset=10&sort=asc&apikey=Your_API`
           );
           const data = await response.json();
           console.log(data);
@@ -108,7 +108,7 @@ export default function AccountCreation() {
     if (receiver !== "" && amount > 0 && amount < accountBalance) {
       try {
         const provider = new ethers.providers.JsonRpcProvider(
-          "https://eth-sepolia.g.alchemy.com/v2/-4e5fsDjluNgzUNf9u0nNElwVvNV2QYq"
+          "Your RPC URL"
         );
         const walletWithProvider = wallet.connect(provider);
         const transaction = await walletWithProvider.sendTransaction({
