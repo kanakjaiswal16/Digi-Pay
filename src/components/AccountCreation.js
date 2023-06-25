@@ -3,6 +3,9 @@ import { ethers } from "ethers";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./CSS/AccountCreation.css";
+import blockchain from "./CSS/Blockchain.json";
+import logo from "./CSS/Logo.json";
+import Lottie from "lottie-react";
 console.log(process.env.REACT_APP_ETHERSCAN_API_KEY);
 export default function AccountCreation() {
   const [isRecover, setRecover] = useState(false);
@@ -144,93 +147,143 @@ export default function AccountCreation() {
   }
 
   return (
-    <div className="container">
-      <h2 className="title">Digi Pay</h2>
-      <p className="description">Welcome to Decentralized Crypto Wallet</p>
-      {!isRecover && !isCreate && (
-        <button className="primary-button" onClick={handleCreateAccount}>
-          Create Account
-        </button>
-      )}
-      {!isRecover && !isCreate && (
-        <button className="secondary-button" onClick={handleRecoverAccount}>
-          Recover
-        </button>
-      )}
-
-      {isRecover && !isSeed && (
-        <div className="input-container">
-          <input
-            className="input"
-            type="text"
-            onChange={(e) => setSeedPhrase(e.target.value)}
-            placeholder="Enter seed phrase"
-          />
-          <button className="submit-button" onClick={handleSubmit}>
-            Submit
-          </button>
-        </div>
-      )}
-
-      {wallet && !isSeed && (
-        <>
-          <p className="seed-phrase-text">
-            Keep the seed phrase safe for recovery purposes:
-          </p>
-          <p className="seed-phrase">{seedPhrase}</p>
-          <button className="next-button" onClick={handleNext}>
-            Next
-          </button>
-        </>
-      )}
-
-      {wallet && isSeed && (
-        <div className="account-details-container">
-          <p className="address-text">Address: {wallet.address}</p>
-          <p className="balance-text">Account Balance: {accountBalance} ETH</p>
-          <div className="account-inputs">
-            <input
-              type="text"
-              placeholder="Enter Address"
-              onChange={handleReceiverChange}
-            />
-            <input
-              type="number"
-              placeholder="Enter amount"
-              onChange={handleAmountChange}
-            />
+    <div className="application">
+      <div className="container">
+        <div className="col-1-of-2 animation">
+          <div style={{ width: "80%", height: "80%" }}>
+            <Lottie animationData={blockchain} />
           </div>
-          <button className="send-button" onClick={handleSend}>
-            Send
-          </button>
+        </div>
+        <div className="col-1-of-2 content">
+          <div className="titleBar">
+            <Lottie animationData={logo} className="anime" />
+            <h2 className="title">Digi Pay</h2>
+          </div>
+          <p className="description">A Decentralized Crypto Wallet</p>
+          <div className="buttons">
+            {!isRecover && !isCreate && (
+              <button
+                className="btn btn--white btn--animated"
+                onClick={handleCreateAccount}
+              >
+                Create Account
+              </button>
+            )}
+            {!isRecover && !isCreate && (
+              <button
+                className="btn btn--white btn--animated"
+                onClick={handleRecoverAccount}
+              >
+                Recover
+              </button>
+            )}
+          </div>
 
-          <button className="logout-button" onClick={onLogout}>
-            Logout
-          </button>
-          <div className="transaction-history">
-            <h3>Transaction History</h3>
-            {transactions.map((tx, index) => (
-              <div key={index} className="transaction">
-                <p className="hash">
-                  Hash:{" "}
-                  <a
-                    href={`https://sepolia.etherscan.io/tx/${tx.hash}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {tx.hash}
-                  </a>
-                </p>
+          {isRecover && !isSeed && (
+            <div className="input-container">
+              <input
+                className="enter_address_field"
+                type="text"
+                onChange={(e) => setSeedPhrase(e.target.value)}
+                placeholder="Enter seed phrase"
+              />
+              <button className="btn-text subBtn" onClick={handleSubmit}>
+                Submit &rarr;
+              </button>
+            </div>
+          )}
 
-                <p>From: {tx.from}</p>
-                <p>To: {tx.to}</p>
-                <p>Value: {ethers.utils.formatEther(tx.value)} ETH</p>
+          {wallet && !isSeed && (
+            <div className="secondFrame">
+              <p className="seed-phrase-text">
+                Keep the seed phrase safe for recovery purposes:
+              </p>
+              <div className="seedcopy">
+                <span type="text" className="seed_phrase_input">
+                  {seedPhrase}
+                </span>
+                <abbr title="Copy to clipboard">
+                  <button className="copyBtn">&#128203;</button>
+                </abbr>
               </div>
-            ))}
-          </div>
+              <button className="btn-text nextButton" onClick={handleNext}>
+                Next &rarr;
+              </button>
+            </div>
+          )}
+
+          {wallet && isSeed && (
+            <div className="account-details-container">
+              <div className="account__details">
+                <label>Address</label>
+                <p className="address-text">{wallet.address}</p>
+                <label>Account Balance</label>
+                <p className="balance-text">{accountBalance} ETH</p>
+              </div>
+              <div className="account-inputs">
+                <input
+                  type="text"
+                  placeholder="Enter Address"
+                  className="enter_address_field"
+                  onChange={handleReceiverChange}
+                />
+                <input
+                  type="number"
+                  placeholder="Enter amount"
+                  className="enter_amount_field"
+                  onChange={handleAmountChange}
+                />
+              </div>
+              <div className="form_btns">
+                <button
+                  className="btn btn--blue send-button"
+                  onClick={handleSend}
+                >
+                  Send
+                </button>
+                <button
+                  className="btn btn--blue logout-button"
+                  onClick={onLogout}
+                >
+                  Logout
+                </button>
+              </div>
+              {/* </div> */}
+              <div className="transaction-history">
+                <h3>Transaction History</h3>
+                {transactions.map((tx, index) => (
+                  <div key={index} className="transaction">
+                    <p className="hash">
+                      Hash:{" "}
+                      <a
+                        href={`https://sepolia.etherscan.io/tx/${tx.hash}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {tx.hash}
+                      </a>
+                    </p>
+                    <div className="transacDets">
+                      <div>
+                        <label>From</label>
+                        <p>{tx.from}</p>
+                      </div>
+                      <div>
+                        <label>To</label>
+                        <p>{tx.to}</p>
+                      </div>
+                      <div className="ethereumVal">
+                        <p>Value: {ethers.utils.formatEther(tx.value)} ETH</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+          <ToastContainer />
         </div>
-      )}
-      <ToastContainer />
+      </div>
     </div>
   );
 }
